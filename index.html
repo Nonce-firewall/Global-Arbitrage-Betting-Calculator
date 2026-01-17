@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Arbitrage Engine</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+    <div class="calc-card">
+        <div class="header">
+            <h2 data-i18n="title">Global Arbitrage Engine</h2>
+            <div class="header-controls">
+                <button id="themeToggle" class="control-pill" onclick="toggleTheme()" title="Toggle Theme">
+                    <span class="icon">🌓</span>
+                </button>
+                <div class="lang-wrapper">
+                    <select id="langSelect" class="lang-select" onchange="changeLanguage()">
+                        <option value="en">English</option>
+                        <option value="es">Espanol</option>
+                        <option value="fr">French</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label data-i18n="market">Market Mode</label>
+            <div class="toggle-container">
+                <div class="toggle-slider" id="slider"></div>
+                <button id="mode2" class="toggle-btn active" onclick="setMode(2)">2</button>
+                <button id="mode3" class="toggle-btn" onclick="setMode(3)">3</button>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label data-i18n="oddsLabel">Odds</label>
+            <div class="odds-row">
+                <div class="odd-input-wrap">
+                    <span class="input-sublabel">Odd 1</span>
+                    <input type="number" id="o1" value="3.05" step="0.01">
+                </div>
+                <div class="odd-input-wrap">
+                    <span class="input-sublabel">Odd 2</span>
+                    <input type="number" id="o2" value="1.75" step="0.01">
+                </div>
+                <div id="o3-container" class="fade-container odd-input-wrap">
+                    <span class="input-sublabel">Odd 3</span>
+                    <input type="number" id="o3" value="3.50" step="0.01">
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label data-i18n="investment">Capital / Stake</label>
+            <input type="number" id="totalStake" class="full-width-input" value="1000">
+        </div>
+
+        <button id="advToggle" class="text-link" onclick="toggleAdvanced()" data-i18n="advBtn">+ Advanced Settings</button>
+
+        <div id="advanced-section" class="collapsible">
+            <div class="settings-row">
+                <div class="input-group flex-1">
+                    <label data-i18n="commission">Comm %</label>
+                    <input type="number" id="comm" value="0" step="0.1">
+                </div>
+                <div class="input-group flex-1">
+                    <label data-i18n="rounding">Rounding</label>
+                    <select id="roundTo">
+                        <option value="0.01">Normal</option>
+                        <option value="1">1.0</option>
+                        <option value="5">5.0</option>
+                        <option value="10">10.0</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-box">
+            <div class="stat"><span data-i18n="stake">Amount</span> 1: <span id="s1">0.00</span></div>
+            <div class="stat"><span data-i18n="stake">Amount</span> 2: <span id="s2">0.00</span></div>
+            <div id="s3-row" class="stat fade-container"><span data-i18n="stake">Amount</span> 3: <span id="s3">0.00</span></div>
+            <hr>
+            <div class="stat profit-line">
+                <span data-i18n="profit">Min. Profit</span>: <span id="minProfit" class="green">0.00</span>
+            </div>
+            <div class="stat">ROI: <span id="minPerc">0.00%</span></div>
+        </div>
+
+        <button id="saveBtn" class="action-btn primary" onclick="saveResult()" data-i18n="save">Save Calculation</button>
+    </div>
+
+    <div class="history-container">
+        <div class="history-header">
+            <h3 data-i18n="history">Recent Calculations</h3>
+            <button class="clear-btn" onclick="clearHistory()" data-i18n="clear">Clear</button>
+        </div>
+        <table id="historyTable">
+            <thead>
+                <tr>
+                    <th data-i18n="hCapital">Capital</th>
+                    <th data-i18n="hProfit">Profit</th>
+                    <th data-i18n="hROI">ROI</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
